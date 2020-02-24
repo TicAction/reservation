@@ -29,6 +29,7 @@ class ConfirmationLocation extends Mailable
      */
     public function build()
     {
+
         $user = Auth::user()->name;
         return $this->view('mails.index',compact('user'));
     }

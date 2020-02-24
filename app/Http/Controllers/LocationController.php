@@ -47,6 +47,7 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
+
        $location = new Location();
        $location->quantity = $request->get('quantity');
        $location->return_date = $request->get('return_date');
@@ -54,15 +55,15 @@ class LocationController extends Controller
        $location->item_id = $request->get('item_id');
        $location->user_id = Auth::user()->id;
 
-        Mail::to("sec.plein-soleil@cssh.qc.ca")
-       ->send(new ConfirmationLocation($location));
+
 
        $location->save();
        $items = Item::get()->pluck('item_name','id');
 
+        Mail::to("ghischa@gmail.com")
+            ->send(new ConfirmationLocation($location));
 
-
-
+        dd('je suis le meilleur1');
 
 
        return redirect()->route('location_index',compact('items'));
